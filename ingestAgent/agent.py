@@ -1,8 +1,12 @@
+from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).parent.parent / ".env")
+
 from google.adk.agents.llm_agent import Agent
 
-root_agent = Agent(
+ingestAgent = Agent(
     model='gemini-2.5-flash',
-    name='root_agent',
-    description='A helpful assistant for user questions.',
-    instruction='Answer user questions to the best of your knowledge',
+    name='ingestAgent',
+    description='Ingest agent for the application.',
+    instruction='Ingest the data from the source and store for further processing.',
 )

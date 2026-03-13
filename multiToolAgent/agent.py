@@ -1,5 +1,9 @@
 import datetime
+from pathlib import Path
 from zoneinfo import ZoneInfo
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).parent.parent / ".env")
+
 from google.adk.agents import Agent
 
 def get_weather(city: str) -> dict:
