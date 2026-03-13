@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+
+# Environment variables (sensitive data - API keys)
+.env
+
+# ADK local session data
+.adk/
+
+# Test artifacts
+test/tmp/
+
+# OS
+.DS_Store
+Thumbs.db
