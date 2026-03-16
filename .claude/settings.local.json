@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:developers.openai.com)",
+      "WebFetch(domain:x.ai)",
+      "WebFetch(domain:platform.moonshot.ai)",
+      "WebFetch(domain:kimi.moonshot.cn)",
+      "WebFetch(domain:www.kimi.com)",
+      "WebFetch(domain:docs.x.ai)",
+      "WebFetch(domain:moonshotai.github.io)",
+      "WebFetch(domain:api.moonshot.ai)",
+      "WebFetch(domain:openrouter.ai)",
+      "WebFetch(domain:lmarena.ai)",
+      "WebFetch(domain:artificialanalysis.ai)",
+      "WebFetch(domain:arena.ai)",
+      "Bash(.venv/Scripts/python --version)",
+      "Bash(.venv/Scripts/python -m jupyter kernelspec list)",
+      "Bash(.venv/Scripts/python.exe -c \"import ipykernel; print\\(ipykernel.__version__\\)\")",
+      "Bash(.venv/Scripts/python.exe -m ipykernel install --user --name adk-playground --display-name \"Python \\(adk-playground\\)\")"
+    ]
+  }
+}

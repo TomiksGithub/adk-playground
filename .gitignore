@@ -15,9 +15,6 @@ __pycache__/
 # Test artifacts
 test/tmp/
 
-# Notebooks (may contain sensitive outputs or keys)
-*.ipynb
-
 # OS
 .DS_Store
 Thumbs.db
