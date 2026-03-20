@@ -22,7 +22,24 @@
       "Bash(.venv/Scripts/python --version)",
       "Bash(.venv/Scripts/python -m jupyter kernelspec list)",
       "Bash(.venv/Scripts/python.exe -c \"import ipykernel; print\\(ipykernel.__version__\\)\")",
-      "Bash(.venv/Scripts/python.exe -m ipykernel install --user --name adk-playground --display-name \"Python \\(adk-playground\\)\")"
+      "Bash(.venv/Scripts/python.exe -m ipykernel install --user --name adk-playground --display-name \"Python \\(adk-playground\\)\")",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)",
+      "Bash(git pull:*)",
+      "Bash(.venv/Scripts/python -c \"from weatherAgentGuardrails.agent import root_agent; print\\(root_agent.name\\)\")",
+      "Bash(.venv/Scripts/python -c \"import weatherAgent; print\\(dir\\(weatherAgent\\)\\)\")",
+      "Bash(.venv/Scripts/adk web:*)",
+      "Bash(.venv/Scripts/python -c \":*)",
+      "Bash(.venv/Scripts/python -c \"import google.adk; print\\(google.adk.__file__\\)\")",
+      "Bash(.venv/Scripts/python -c \"from timeAndWeatherAgent.agent import root_agent; print\\(root_agent.name\\)\")",
+      "Bash(rm \"c:/repos/adk-playground/shared/__init__.py\")",
+      "Bash(.venv/Scripts/python -c \"from shared.tools import get_weather, geocode; print\\(''import OK''\\)\")",
+      "Bash(find \"c:/repos/adk-playground\" -name \"__pycache__\" -type d -exec rm -rf {} +)",
+      "Bash(.venv/Scripts/python -c \"from timeAndWeatherVocalAgent.agent import root_agent; print\\(root_agent.name, root_agent.model\\)\")",
+      "Bash(grep -r \"native.audio\\\\|audio.*agent\\\\|live.*api\\\\|realtime\" c:/repos/adk-playground/.venv/Lib/site-packages/google/adk/ --include=*.py -l)"
     ]
   }
 }
