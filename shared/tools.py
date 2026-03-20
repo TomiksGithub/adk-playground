@@ -1,21 +1,20 @@
 import datetime
 import requests
-from pathlib import Path
 from geopy.geocoders import Nominatim
-from dotenv import load_dotenv
-load_dotenv(Path(__file__).parent.parent / ".env")
+from geopy.location import Location
 from timezonefinder import TimezoneFinder
 import pytz
-from google.adk.agents.llm_agent import Agent
-from google.adk.models.google_llm import Gemini
-from google.genai import types
 
+
+def geocode(city: str) -> Location | None:
+    """Return a geopy Location for a given city, or None if not found."""
+    geolocator = Nominatim(user_agent="adk_shared_tools")
+    return geolocator.geocode(city)
 
 
 def get_timezone(city: str) -> str | None:
     """Return the IANA timezone string for a given city, or None if not found."""
-    geolocator = Nominatim(user_agent="city_time_agent")
-    location = geolocator.geocode(city)
+    location = geocode(city)
     if not location:
         return None
     tf = TimezoneFinder()
@@ -23,15 +22,20 @@ def get_timezone(city: str) -> str | None:
 
 
 def get_current_time(city: str) -> dict:
-    """Get current time in provided city."""
+    """Get current time in provided city.
+
+    Args:
+        city: Name of the city, e.g. 'Warsaw', 'London'.
+
+    Returns:
+        dict: status and current time or error message.
+    """
     try:
         timezone_str = get_timezone(city)
         if not timezone_str:
             return {"status": "error", "error": f"Could not determine timezone for city: {city}"}
-
         now = datetime.datetime.now(pytz.timezone(timezone_str))
-        time_str = now.strftime('%I:%M %p')
-        return {"status": "success", "city": city, "timea": time_str}
+        return {"status": "success", "city": city, "time": now.strftime("%I:%M %p")}
     except Exception as e:
         return {"status": "error", "error": str(e)}
 
@@ -43,11 +47,10 @@ def get_weather(city: str) -> dict:
         city: Name of the city, e.g. 'Warsaw', 'London'.
 
     Returns:
-        dict: status and weather report or error message.
+        dict: status and weather data or error message.
     """
     try:
-        geolocator = Nominatim(user_agent="city_weather_agent")
-        location = geolocator.geocode(city)
+        location = geocode(city)
         if not location:
             return {"status": "error", "error": f"Could not find location for city: {city}"}
 
@@ -71,14 +74,23 @@ def get_weather(city: str) -> dict:
         return {"status": "error", "error": str(e)}
 
 
-root_agent = Agent(
-    name='orchestratorAgent',
-    description='Orchestrator agent for the application.',
-    instruction='Orchestrate the application and call the appropriate agents to answer the user\'s question.',
-    tools=[get_current_time, get_weather],
-    model=Gemini(
-        model_name='gemini-2.5-flash',
-        retry_options=types.HttpRetryOptions(initial_delay=1, attempts=10),
-    ),
+def say_hello(name: str | None = None) -> str:
+    """Provides a simple greeting. If a name is provided, it will be used.
 
-)
+    Args:
+        name: The name of the person to greet. Defaults to a generic greeting if not provided.
+
+    Returns:
+        str: A friendly greeting message.
+    """
+    if name:
+        print(f"--- Tool: say_hello called with name: {name} ---")
+        return f"Hello, {name}!"
+    print("--- Tool: say_hello called without a specific name ---")
+    return "Hello there!"
+
+
+def say_goodbye() -> str:
+    """Provides a simple farewell message to conclude the conversation."""
+    print("--- Tool: say_goodbye called ---")
+    return "Goodbye! Have a great day."
